@@ -1,0 +1,15 @@
+{
+    "name": "All Tab Manager",
+    "version": "1.0.0",
+    "description": "Manage tabs across windows",
+    "manifest_version": 3,
+    "permissions": [
+        "tabs",
+        "tabGroups"
+    ],
+    "author": "Priyansi Parida",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Manage tabs across windows"
+    }
+}
