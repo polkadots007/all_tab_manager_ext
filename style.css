@@ -1,3 +1,10 @@
+
+#tabs{
+	margin-bottom: 5px;
+}
+.child-item {
+	padding: 2px;
+}
 .child-item:hover {
-  background-color: cornflowerblue;
+  border: 1px solid gray;
 }

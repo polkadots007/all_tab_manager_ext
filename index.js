@@ -19,7 +19,7 @@ async function getTabData(){
         oImg.style.cursor = 'pointer';
         oImg.style.backgroundColor = 'none'
         grpInfo && Object.values(grpInfo)?.length>0 ? (div.style.backgroundColor = grpInfo.color) : null;
-        (tab.active && tab.windowId === openedWindow.id) && (div.style.backgroundColor = '#1a73e8');
+        (tab.active && tab.windowId === openedWindow.id) && (div.style.backgroundColor = 'white');
         (tab.active && tab.windowId === openedWindow.id) && (div.style.border = '2px solid black');
         (tab.active && tab.windowId === openedWindow.id) && (div.style.boxShadow = '0 0 10px #fff;');
         oImg.onclick=async ()=>{
