@@ -6,5 +6,5 @@
 	padding: 2px;
 }
 .child-item:hover {
-  border: 1px solid gray;
+  border: 2px solid gray;
 }
