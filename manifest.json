@@ -11,5 +11,8 @@
     "action": {
         "default_popup": "index.html",
         "default_title": "Manage tabs across windows"
+    },
+    "icons": {
+        "100": "iconsT.png"
     }
 }
