@@ -10,16 +10,17 @@ async function getTabData(){
         console.log('check',grpInfo?.title || tab.url, tab.title +' - '+ grpInfo?.title || tab.url)
         div.setAttribute('class', `${(tab.active && tab.windowId === openedWindow.id) && 'rounded'} child-item d-flex align-items-center justify-contents-center`);
         var oImg = document.createElement("img");
-        oImg.setAttribute('src', tab.favIconUrl);
+        oImg.setAttribute('src', tab.favIconUrl || "https://img.icons8.com/stickers/100/tab.png");
+        
         oImg.setAttribute('alt', tab.title);
         oImg.setAttribute('height', '30px');
         oImg.setAttribute('width', '30px');
         oImg.setAttribute('class', 'm-2 pe-auto icon');
         oImg.setAttribute('title', tab.title +' - '+ (grpInfo?.title || tab.url));
         oImg.style.cursor = 'pointer';
-        oImg.style.backgroundColor = 'none'
+        oImg.style.backgroundColor = 'white'
         grpInfo && Object.values(grpInfo)?.length>0 ? (div.style.backgroundColor = grpInfo.color) : null;
-        (tab.active && tab.windowId === openedWindow.id) && (div.style.backgroundColor = 'white');
+        (tab.active && tab.windowId === openedWindow.id) && (div.style.backgroundColor = '#1a73e8');
         (tab.active && tab.windowId === openedWindow.id) && (div.style.border = '2px solid black');
         (tab.active && tab.windowId === openedWindow.id) && (div.style.boxShadow = '0 0 10px #fff;');
         oImg.onclick=async ()=>{
@@ -29,6 +30,20 @@ async function getTabData(){
             await chrome.tabs.update(tab.id, {active: isActive});   
          };
         div.appendChild(oImg);
+        console.log('tab', tab)
+        var oTitle = document.createElement('div');
+        oTitle.setAttribute('height', '30px')
+        oTitle.setAttribute('width', '100px')
+        oTitle.innerText = tab.title;
+        oTitle.setAttribute('title', tab.title + ' - ' + (grpInfo?.title || tab.url));
+        oTitle.style.cursor = 'pointer';
+        oTitle.onclick=async ()=>{
+            const curTab = await chrome.tabs.get(tab.id);
+            const isActive = !curTab.active;
+            await chrome.windows.update(tab.windowId, {focused: true});
+            await chrome.tabs.update(tab.id, {active: isActive});   
+         };
+        div.appendChild(oTitle);
         document.getElementById("tabs").appendChild(div);
 
     })
@@ -37,7 +52,7 @@ async function openNewTab(){
     var div = document.createElement('div');
     div.setAttribute('class', 'child-item d-flex align-items-center justify-contents-center')
     var newTab = document.createElement("span");
-    newTab.innerHTML="+N";
+    newTab.innerHTML="Open New Tab";
     newTab.setAttribute('height', '30px');
     newTab.setAttribute('width', '30px');
     newTab.setAttribute('class', 'm-2 pe-auto icon');
@@ -54,7 +69,7 @@ async function openNewTabWindow(){
     var div = document.createElement('div');
     div.setAttribute('class', 'child-item d-flex align-items-center justify-contents-center')
     var newTab = document.createElement("span");
-    newTab.innerHTML="+W";
+    newTab.innerHTML="Open New Window";
     newTab.setAttribute('height', '30px');
     newTab.setAttribute('width', '30px');
     newTab.setAttribute('class', 'm-2 pe-auto icon');
